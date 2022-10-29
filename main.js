@@ -1,4 +1,5 @@
-// Query selectors here
+// Query selectors
+
 var cookButton = document.querySelector('#lets-cook');
 var sideRadio = document.querySelector('#side');
 var mainRadio = document.querySelector('#main-dish');
@@ -17,7 +18,8 @@ var removeButtons = document.querySelectorAll('.remove-buttons');
 
 
 
-// Food options
+// Food option arrays
+
 var sides = [
     "Miso Glazed Carrots",
     "Coleslaw",
@@ -70,7 +72,8 @@ var desserts = [
 
 
 
-// Event Listeners go here
+// Event Listeners
+
 cookButton.addEventListener('click', selectFood)
 favorite.addEventListener('click', addFavorite)
 viewFavorites.addEventListener('click', showFavorites)
@@ -112,10 +115,12 @@ function selectFood() {
         selectedFood = getRndFood(mains);
     } else if (dessertRadio.checked == true) {
         selectedFood = getRndFood(desserts);
+    } else if (selectedFood == undefined) {
+        return
     }
-suggestion.innerText = `${selectedFood}!`;
-displayCourse()
-favoriteList.classList.add("hidden");
+    suggestion.innerText = `${selectedFood}!`;
+    displayCourse();
+    favoriteList.classList.add("hidden");
 };
 
 function addFavorite() {
@@ -138,7 +143,6 @@ function showFavorites() {
 
 
 function listFavorites() {
-    // Needs to reset the HTML every time view favorites is pressed
     favoriteDishes.innerHTML = " ";
     for (let index = 0; index < favoriteFoods.length; index++) {
         favoriteDishes.innerHTML += 
@@ -150,25 +154,13 @@ function listFavorites() {
 
 
 function removeFavorite(event) {
-    // alert(event.target.className)}   
-    // if (event.target.className == ".remove-buttons") {
     for (let index = 0; index < favoriteFoods.length; index++) {
         if ((event.target.id == favoriteFoods[index].id) && (event.target.className == "remove-buttons")) {
             favoriteFoods.splice(index, 1);
         }
     }
-    // }
-    // event.target.parentNode.remove();
     listFavorites();
 }
-
-// function removeArticle(event) {
-//     if (event.target.class == "remove-buttons") {
-//         removeFavorite(event);
-//     }
-// }
-
-
 
 function goBack() {
     prompt.classList.remove("hidden");
