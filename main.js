@@ -112,6 +112,8 @@ function selectFood() {
         selectedFood = getRndFood(mains);
     } else if (dessertRadio.checked == true) {
         selectedFood = getRndFood(desserts);
+    } else if (selectedFood == undefined) {
+        return
     }
 suggestion.innerText = `${selectedFood}!`;
 displayCourse()
