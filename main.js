@@ -79,6 +79,7 @@ favorite.addEventListener('click', addFavorite)
 viewFavorites.addEventListener('click', showFavorites)
 goBackButton.addEventListener('click', goBack)
 favoriteDishes.addEventListener('click', removeFavorite);
+window.addEventListener('load', loadLocalStorage)
 
 
 // Global vars
@@ -132,6 +133,18 @@ function addFavorite() {
     }
     favoriteFoods.push(newFood);
     listFavorites();
+    addLocalStorage(newFood.id, newFood.name);
+}
+
+function addLocalStorage(newFoodID, newFoodName) {
+    if (localStorage.length > 1) {
+    localStorage.setItem({id: newFoodID, name: newFoodName});
+    }
+}
+
+function loadLocalStorage() {
+    favoriteFoods.push(localStorage);
+    listFavorites();
 }
 
 function showFavorites() {
@@ -140,7 +153,6 @@ function showFavorites() {
     favoriteSection.classList.add("hidden");
     favoriteList.classList.remove("hidden");
 }
-
 
 function listFavorites() {
     favoriteDishes.innerHTML = " ";
